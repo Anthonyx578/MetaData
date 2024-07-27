@@ -13,7 +13,13 @@ async function bootstrap() {
   .build();
 
   const Document = SwaggerModule.createDocument(app,config);
-  SwaggerModule.setup('api',app,Document);
+  SwaggerModule.setup('api',app,Document,{
+    swaggerOptions: {
+      docExpansion: 'none',
+      filter: true,
+      tryItOutEnabled: true, // Esto hace que los controladores no se desplieguen por defecto
+    },
+  });
 
   await app.listen(3000);
   logger.log('Servidor Ejecutandose en http://localhost:3000')
